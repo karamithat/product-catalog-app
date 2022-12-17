@@ -1,3 +1,47 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+@layer base {
+    html,body{
+        @apply font-body m-0 p-0;
+    }
+
+    *{
+        @apply box-border;
+    }
+}
+
+@layer components {
+    .headerLink {
+        @apply cursor-pointer opacity-75 transition hover:opacity-100;
+    }
+    .link-underline {
+        border-bottom-width: 0;
+        background-image: linear-gradient(transparent, transparent), linear-gradient(#fff, #fff);
+        background-size: 0 3px;
+        background-position: 0 100%;
+        background-repeat: no-repeat;
+        transition: background-size .5s ease-in-out;
+    }
+
+    .link-underline-black {
+        background-image: linear-gradient(transparent, transparent), linear-gradient(#000, #000)
+    }
+
+    .link-underline:hover {
+        background-size: 100% 3px;
+        background-position: 0 100%;
+    }
+
+    .headerIcon{
+        @apply h-6 w-6 cursor-pointer opacity-75 transition hover:opacity-100;
+    }
+
+    .link{
+        @apply relative cursor-pointer text-lg font-medium py-2;
+    }
+}
