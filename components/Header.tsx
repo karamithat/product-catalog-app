@@ -5,12 +5,12 @@ import { AiOutlineHeart, AiOutlineUser } from "react-icons/ai";
 
 const Header = () => {
   return (
-    <header className="sticky top-0 z-30 flex w-full items-center justify-between p-4">
+    <header className="sticky top-0 z-30 flex w-full items-center justify-between p-4 shadow-md bg-white">
       <div className="flex items-center justify-center md:w-1/5">
         <Link href="/">
           <div className="relative cursor-pointer opacity-75 transition hover:opacity-100">
             <Image
-              src="https://rb.gy/ops3sd"
+              src="/logo.svg"
               alt="logo"
               width={130}
               height={130}
@@ -29,7 +29,7 @@ const Header = () => {
       </div>
       <div className="flex items-center justify-center gap-x-4 md:w-1/5">
         <AiOutlineHeart className="headerIcon" />
-        <Link href="/login">
+        <Link href="/auth/login">
           <AiOutlineUser className="headerIcon" />
         </Link>
       </div>
