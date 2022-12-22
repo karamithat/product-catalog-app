@@ -1,7 +1,37 @@
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
+import {useLoginMutation} from "../../services/authApi"
+import { toast } from 'react-toastify';
+
+import 'react-toastify/dist/ReactToastify.css';
 
 const Login = () => {
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const router = useRouter();
+
+  const [login, {data:loginData, isSuccess:isLoginSuccess, isError:isLoginError, error:loginError}] = useLoginMutation();
+
+  const handleSubmit = async () => {
+  if (email && password) {
+   await login({email, password}); 
+  } else {
+    toast.error("Please fill all fields");
+  }
+    
+  };
+
+  useEffect(() => {
+    if (isLoginSuccess) {
+      toast.success("Login Success");
+      router.push("/");
+    }
+  }, [isLoginSuccess]);
+
   return (
     <section className="bg-gray-50 dark:bg-gray-900">
       <div className="mx-auto flex flex-col items-center justify-center px-6 py-8 md:h-screen lg:py-0">
@@ -17,6 +47,7 @@ const Login = () => {
               Sign in to your account
             </h1>
             <form
+              onSubmit={handleSubmit}
               className="space-y-4 md:space-y-6"
             >
               <div>
@@ -24,6 +55,8 @@ const Login = () => {
                   Your email
                 </label>
                 <input
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   type="email"
                   name="email"
                   className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-gray-900 focus:border-primary focus:ring-primary dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-primary dark:focus:ring-primary sm:text-sm"
@@ -35,6 +68,9 @@ const Login = () => {
                   Password
                 </label>
                 <input
+
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                   type="password"
                   name="password"
                   placeholder="••••••••"
